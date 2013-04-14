@@ -1,0 +1,5 @@
+Changelog for Prettify (MODx Revolution)
+
+Prettify 1.0.0
+==============
+Initial Version
