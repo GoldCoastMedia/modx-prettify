@@ -28,9 +28,15 @@ $snippets = array();
 $snippets[1] = $modx->newObject('modSnippet');
 $snippets[1]->fromArray(array (
   'id' => 1,
-  'description' => 'Prettify snippet',
+  'property_preprocess' => false,
   'name' => 'Prettify',
+  'description' => 'Prettify snippet',
 ), '', true, true);
 $snippets[1]->setContent(file_get_contents($sources['source_core'] . '/elements/snippets/prettify.snippet.php'));
+
+
+$properties = include $sources['data'].'properties/properties.prettify.snippet.php';
+$snippets[1]->setProperties($properties);
+unset($properties);
 
 return $snippets;

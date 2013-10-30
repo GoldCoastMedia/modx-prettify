@@ -160,9 +160,9 @@ $components = array(
                 'category' => 'Prettify',
                 'description' => 'Prettify snippet',
                 'static' => true,
-                'propertySets' => array(
-                	'Prettify',
-                ),
+                /*'propertySets' => array(
+                	'Default',
+                ),*/
             ),
 
         ),

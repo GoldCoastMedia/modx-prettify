@@ -70,8 +70,13 @@ if ($object->xpdo) {
         $intersects = array (
                 0 =>  array (
                   'element' => 'Prettify',
+                  'property_set' => 'PropertySet1',
                   'element_class' => 'modSnippet',
+                ),
+                1 =>  array (
+                  'element' => 'Prettify',
                   'property_set' => 'Prettify',
+                  'element_class' => 'modSnippet',
                 ),
             );
 

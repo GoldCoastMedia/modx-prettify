@@ -31,4 +31,9 @@ $propertySets[1]->fromArray(array (
   'name' => 'Prettify',
   'description' => 'Prettify snippet property set',
 ), '', true, true);
+
+$properties = include $sources['data'].'properties/properties.prettify.propertyset.php';
+$propertySets[1]->setProperties($properties);
+unset($properties);
+
 return $propertySets;
