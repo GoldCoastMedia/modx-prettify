@@ -29,7 +29,7 @@ class Prettify {
 	public $modx;
 
 	public $config = array(
-		'autoloader'  => TRUE,
+		'autoloader'  => FALSE,
 		'code'        => NULL,
 		'css'         => NULL,
 		'entities'    => TRUE,
@@ -40,18 +40,18 @@ class Prettify {
 		'skin'        => NULL,
 		'wrap'        => TRUE,
 	);
-	
+
 	private $code = NULL;
 	private $remote_url = 'https://google-code-prettify.googlecode.com/svn/loader/';
-	
+
 	public function __construct(modX &$modx, array &$properties)
 	{
 		$this->modx =& $modx;
-
+		
 		// Merge script properties and force to lowercase
 		$this->config = array_change_key_case( array_merge($this->config, $properties), CASE_LOWER );
 	}
-	
+
 	public function run()
 	{
 		// Maintain original code
@@ -70,24 +70,34 @@ class Prettify {
 		if($this->config['entities']) {
 			$this->code = htmlspecialchars($this->code);
 		}
-		
+
 		// Wrap
 		if($this->config['wrap']) {
-			$this->code = $this->wrap_html($this->code, $this->config['lang'], $this->config['linenums']);
+			$this->code = $this->wrap_html(
+				$this->code,
+				$this->config['lang'],
+				$this->config['linenums']
+			);
 		}
 		
 		// Add CSS
-		if( $css = $this->prepare_array($this->config['css']) ) {
+		$css = $this->prepare_array($this->config['css']);
+
+		if( !empty($css) ) {
 			$this->insert_css($css);
 		}
 
 		$this->setup_files($this->config['autoloader'], $this->config['hosted']);
-
+		
 		return $this->code;
 	}
 	
 	/**
 	 * Insert resources from assets directory
+	 *
+	 * @param  bool  autoloader
+	 * @param  bool  hosted
+	 * @return null
 	 */
 	private function setup_files($autoloader = TRUE, $hosted = FALSE)
 	{
@@ -100,21 +110,21 @@ class Prettify {
 		if(!$autoloader) {
 			$this->modx->regClientHTMLBlock('<script type="text/javascript">prettyPrint();</script>');
 		}
-
+		
 		// Add default stylesheet if no CSS provided
-		if( $this->config['css'] === NULL ) {
+		if( $this->config['css'] === NULL AND $this->config['css'] != FALSE ) {
 			$host = $hosted ? MODX_ASSETS_URL . 'components/prettify/css/' : $this->remote_url;
 			$this->modx->regClientCSS($host . 'prettify.css');
 		}
-
+	
 		return;
 	}
 	
 	/**
-	 * Create script URL
+	 * Build URI
 	 *
-	 * @param   boolean  $autoload  Wether to autoload
-	 * @return  string
+	 * @param  bool    $autoload  
+	 * @return string  url
 	 */
 	private function build_uri($autoload)
 	{
@@ -129,7 +139,7 @@ class Prettify {
 		else {
 			$url = 'prettify.js';
 		}
-
+		
 		return $url;
 	}
 	
@@ -146,14 +156,15 @@ class Prettify {
 		$class = NULL;
 		$class .= $lang ? ' lang-' . $lang : NULL;
 		$class .= ' linenums:' . intval($linenums);
-
+		
 		return '<pre class="prettyprint' . $class . '">' . $this->code . '</pre>';
 	}
 	
 	/**
 	 * Insert CSS into the a documents head
 	 *
-	 * @param   array  $arr  css filesd
+	 * @param   array  $arr  css files
+	 * @return  null
 	 */
 	protected function insert_css($stylesheets = array())
 	{
@@ -164,7 +175,7 @@ class Prettify {
 		foreach ($stylesheets as $css) {
 			$this->modx->regClientCSS($css);
 		}
-
+		
 		return;
 	}
 	

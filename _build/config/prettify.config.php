@@ -148,11 +148,11 @@ $components = array(
     'elements' => array(
 
         'propertySets' => array( /* all three fields are required */
-            'Prettify' => array(
+            /*'Prettify' => array(
                 'name' => 'Prettify',
                 'description' => 'Prettify snippet property set',
                 'category' => 'Prettify',
-            ),
+            ),*/
         ),
 
         'snippets' => array(
@@ -171,7 +171,7 @@ $components = array(
                 'category' => 'Prettify',
                 'description' => 'Prettify snippet for parsing MODX [[ ]] tags',
                 'events' => array(
-                	'OnParseDocument' => array(),
+                	'OnWebPagePrerender' => array(),
                 ),
             ),
 
@@ -472,7 +472,8 @@ $components = array(
         //'props',
         //'sp',
         'config',
-        'scriptProperties'
+        'scriptProperties',
+        'properties',
     ),
 );
 

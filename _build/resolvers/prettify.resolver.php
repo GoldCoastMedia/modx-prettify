@@ -3,7 +3,7 @@
  * Resolver for Prettify extra
  *
  * Copyright 2013 by Dan Gibbs <dan@goldcoastmedia.co.uk>
- * Created on 07-28-2013
+ * Created on 10-30-2013
  *
  * Prettify is free software; you can redistribute it and/or modify it under the
  * terms of the GNU General Public License as published by the Free Software

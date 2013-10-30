@@ -54,7 +54,7 @@ Setting this to 40 makes line numbering start at line 40 if you\'re excerpting
 a larger chunk of code';
 
 $_lang['prop_prettify.skin_desc'] = 'See the 
-<a href="http://code.google.com/p/google-code-prettify/source/browse/trunk/src" target="_blank">skin gallery</a>. 
+<a href="http://google-code-prettify.googlecode.com/svn/trunk/styles/index.html" target="_blank">skin gallery</a>. 
 If specified multiple times, the first one to successfully load is used.';
 
 $_lang['prop_prettify.wrap_desc'] = 'When enabled will wrap the source in 
